@@ -17,18 +17,33 @@ showTickets(flights);
 
 function showTickets(flightsArr) {
     flightsBoard.innerHTML = "";
-    flightsArr.forEach((flight) => {
-        let ticket = document.createElement("div");
-        ticket.innerHTML = `<div id="from-to">${flight.from} &#8594; ${
-            flight.to
-        }</div>
-        <div id="departure-return-dates">${flight.dates[0].depart.toDateString()} &#8594; ${flight.dates[1].return.toDateString()}</div>
-        <div id="price">${
-            flight.price
-        }$ <button class="btn add-to-cart">Add to Cart</button><button class="btn edit-price">Edit Price</button></div>`;
-        ticket.classList.add("ticket");
-        flightsBoard.append(ticket);
-    });
+    if (currUser.isAdmin === true) {
+        flightsArr.forEach((flight) => {
+            let ticket = document.createElement("div");
+            ticket.innerHTML = `<div>${flight.id}</div><div id="from-to">${
+                flight.from
+            } &#8594; ${flight.to}</div>
+            <div id="departure-return-dates">${flight.dates[0].depart.toDateString()} &#8594; ${flight.dates[1].return.toDateString()}</div>
+            <div id="price"><b>${
+                flight.price
+            }$</b></div><div id="btns"> <button class="btn add-to-cart">Add to Cart</button><button class="btn edit-price">Edit Price</button></div>`;
+            ticket.classList.add("ticket");
+            flightsBoard.append(ticket);
+        });
+    } else {
+        flightsArr.forEach((flight) => {
+            let ticket = document.createElement("div");
+            ticket.innerHTML = `<div id="from-to">${flight.from} &#8594; ${
+                flight.to
+            }</div>
+            <div id="departure-return-dates">${flight.dates[0].depart.toDateString()} &#8594; ${flight.dates[1].return.toDateString()}</div>
+            <div id="price">${
+                flight.price
+            }$ <button class="btn add-to-cart">Add to Cart</button></div>`;
+            ticket.classList.add("ticket");
+            flightsBoard.append(ticket);
+        });
+    }
 }
 
 addFlight.addEventListener("submit", (e) => {
@@ -43,6 +58,7 @@ addFlight.addEventListener("submit", (e) => {
         document.getElementById("add-flight-return-date").value
     );
     let currFlight = {
+        id: flights.length,
         from,
         to,
         price,
@@ -71,23 +87,38 @@ searchFlight.addEventListener("submit", (e) => {
     const depart = new Date(document.getElementById("departure-date").value);
     const returnDate = new Date(document.getElementById("return-date").value);
     const filteredFlights = flights.filter((flight) => {
-        // console.log(flight.from,from,flight.from.toLowerCase().includes(from));
-        // console.log(flight.to.toLowerCase().includes(to));
-        // console.log(flight.price <= price);
-        // console.log(flight.depart >= depart);
-        // console.log(flight.return <= returnDate);
         return (
             (flight.from.includes(from) ||
-            flight.to.includes(to) ||
-            flight.return === returnDate||
-            flight.depart === depart) &&
+                flight.to.includes(to) ||
+                flight.return === returnDate ||
+                flight.depart === depart) &&
             flight.price <= price
-            
         );
     });
-    console.log("filtered flights: ", filteredFlights);
+    // console.log("filtered flights: ", filteredFlights);
     showTickets(filteredFlights);
-    
 });
 
+// const removeFlightBtns = document.querySelectorAll(".remove-flight");
+// removeFlightBtns.forEach((removeFlightBtn) => {
+//     removeFlightBtn.addEventListener("click", (e) => {
+//         let ticket = removeFlightBtn.parentElement.parentElement;
+//         console.log(ticket.firstChild.innerHTML);
+//         const filtArr = flights.filter(flight => flight.id != ticket.firstChild.innerText)
+//         showTickets(filtArr);
+//         // ticket.style.display = "none";
+//     });
+// });
+
+const editPriceBtns = document.querySelectorAll(".edit-price");
+editPriceBtns.forEach((editBtn) => {
+    editBtn.addEventListener("click", (e) => {
+        let id = editBtn.parentElement.parentElement.firstElementChild.innerText;
+        console.log(id);
+        let currTicket = flights[id]
+        let newPrice = prompt("enter new price");
+        currTicket.price = newPrice;
+        showTickets(flights);
+    });
+});
 

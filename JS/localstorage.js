@@ -1,7 +1,8 @@
-export const usersInfo = [{email:'test@gmail.com',password:'pasWor@d1',isAdmin:true,currentUser:true}];
+export let usersInfo = [{email:'test@gmail.com',password:'pasWor@d1',isAdmin:true,currentUser:true}];
 
-export const flights = [
+export let flights = [
     {
+        id:0,
         from: "Tel aviv",
         to:'amsterdam',
         price: 40,
@@ -11,6 +12,7 @@ export const flights = [
         ]
     },
     {
+        id:1,
         from: "Tel aviv",
         to:'london',
         price: 75,
@@ -20,6 +22,7 @@ export const flights = [
         ]
     },
     {
+        id:2,
         from: "Athens",
         to:'Prague',
         price: 95,
@@ -29,6 +32,7 @@ export const flights = [
         ]
     },
     {
+        id:3,
         from: "Berlin",
         to:'Prague',
         price: 22,
@@ -38,6 +42,7 @@ export const flights = [
         ]
     },
     {
+        id:4,
         from: "London",
         to:'Berlin',
         price: 100,

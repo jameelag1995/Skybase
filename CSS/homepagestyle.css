@@ -158,7 +158,15 @@ main{
 }
 .btn{
     width: 100px;
-    height: 20px;
+    height: 30px;
     margin: 8px;
-
+    background-color: darkcyan;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+.btn:hover{
+    background-color: rgb(1, 94, 94);
 }
