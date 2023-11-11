@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login</title>
+        <link rel="stylesheet" href="../CSS/loginstyle.css" />
+    </head>
+    <body>
+        <div class="container">
+            <h1>Login</h1>
+            <form id="userForm" target="_blank">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required />
+                <div class="error-message" id="emailError"></div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required />
+                <div class="error-message" id="passwordError"></div>
+                <label for="admin"
+                    ><input
+                        type="checkbox"
+                        name="admin"
+                        id="admin"
+                    />&nbsp;&nbsp;Admin</label
+                >
+                <input type="submit" value="Login" />
+            </form>
+        </div>
+
+        <script type="module" src="../JS/localstorage.js"></script>
+        <script type="module" src="../JS/login.js"></script>
+    </body>
+</html>

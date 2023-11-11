@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    background: url(../imgs/natali-quijano-N79MYsd2Ce4-unsplash.jpg) center center no-repeat;
+    background-size: cover;
+
+}
+.main-container{
+    width: 70%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: start;
+    align-items: center;
+    padding-top: 100px;
+}
+
+h1{
+    font-size: 40px;
+}
+p{
+    font-size: 18px;
+}
+a{
+    text-decoration: none;
+    color: #fff;
+    background-color:darkcyan ;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+    border: #fff 2px solid;
+    margin-top: 20px;
+}
+a:hover{
+    background: rgb(0, 97, 97);
+}
