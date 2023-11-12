@@ -83,9 +83,9 @@ function showTickets(flightsArr) {
     } else {
         flightsArr.forEach((flight) => {
             let ticket = document.createElement("div");
-            ticket.innerHTML = `<div>${flight.id}</div><div id="from-to">${flight.from} &#8594; ${
-                flight.to
-            }</div>
+            ticket.innerHTML = `<div>${flight.id}</div><div id="from-to">${
+                flight.from
+            } &#8594; ${flight.to}</div>
             <div id="departure-return-dates">${flight.dates[0].depart.toDateString()} &#8594; ${flight.dates[1].return.toDateString()}</div>
             <div id="price"><b>${
                 flight.price
@@ -138,10 +138,10 @@ searchFlight.addEventListener("submit", (e) => {
     const returnDate = new Date(document.getElementById("return-date").value);
     const filteredFlights = flights.filter((flight) => {
         return (
-            (flight.from.includes(from) ||
-                flight.to.includes(to) ||
-                flight.return === returnDate ||
-                flight.depart === depart) ||
+            flight.from.includes(from) &&
+            flight.to.includes(to) &&
+            flight.return === returnDate &&
+            flight.depart === depart &&
             flight.price <= price
         );
     });
@@ -188,7 +188,7 @@ addToCartBtns.forEach((CartBtn) => {
         } else {
             cartArr.push(flights[id]);
         }
-        console.log('CartArr',cartArr);
+        console.log("CartArr", cartArr);
         showCart(cartArr);
     });
 });
@@ -196,7 +196,9 @@ function showCart(cartlist) {
     cartBoard.innerHTML = "";
     cartlist.forEach((cartItem) => {
         let item = document.createElement("div");
-        item.innerHTML = `<div id="from-to">${cartItem.from} &#8594; ${cartItem.to}</div>
+        item.innerHTML = `<div id="from-to">${cartItem.from} &#8594; ${
+            cartItem.to
+        }</div>
         <div id="departure-return-dates">${cartItem.dates[0].depart.toDateString()} &#8594; ${cartItem.dates[1].return.toDateString()}</div>
         <div id="price"><b>${
             cartItem.price
@@ -206,7 +208,6 @@ function showCart(cartlist) {
         cartBoard.append(item);
     });
 }
-
 
 const calcBtn = document.getElementById("calculate-total-btn");
 const totalEl = document.getElementById("total");
@@ -220,8 +221,7 @@ calcBtn.addEventListener("click", (e) => {
     total = 0;
 });
 
-const logoutBtn = document.getElementById('logout-btn');
-logoutBtn.addEventListener('click',e =>{
-    window.location.href = '../HTML/Login.html';
-
+const logoutBtn = document.getElementById("logout-btn");
+logoutBtn.addEventListener("click", (e) => {
+    window.location.href = "../HTML/Login.html";
 });
