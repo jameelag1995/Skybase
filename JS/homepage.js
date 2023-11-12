@@ -121,7 +121,6 @@ addFlight.addEventListener("submit", (e) => {
         price,
         dates: [{ depart }, { return: returnDate }],
     };
-    console.log(currFlight);
     flights.unshift(currFlight);
     showTickets(flights);
 });
@@ -132,7 +131,6 @@ sortBtn.addEventListener("click", (e) => {
     const sortedFlights = flights.sort((flightA, flightB) => {
         return flightA.price - flightB.price;
     });
-    console.log("sorted flights: ", sortedFlights);
     showTickets(sortedFlights);
 });
 
@@ -154,7 +152,6 @@ searchFlight.addEventListener("submit", (e) => {
                 flight.depart === depart )
         );
     });
-    // console.log("filtered flights: ", filteredFlights);
     showTickets(filteredFlights);
 });
 
@@ -173,18 +170,17 @@ searchFlight.addEventListener("submit", (e) => {
 
 /* ------------------------- Edit Flight Price Event ------------------------ */
 const editPriceBtns = document.querySelectorAll(".edit-price");
-console.log(editPriceBtns);
+
 editPriceBtns.forEach((editBtn) => {
     editBtn.addEventListener("click", (e) => {
         let ticket = editBtn.parentElement.parentElement;
-        console.log("ticket", ticket.innerHTML);
+        
         let id = ticket.firstElementChild.innerText;
-        console.log(id);
+        
         let currTicket = flights[id];
         let newPrice = document.getElementById("priceinput").value;
         currTicket.price = newPrice;
         showTickets(flights);
-        console.log("ticket & ticket price:", currTicket, currTicket.price);
     });
 });
 
@@ -199,14 +195,13 @@ const addToCartBtns = document.querySelectorAll(".add-to-cart");
 addToCartBtns.forEach((CartBtn) => {
     CartBtn.addEventListener("click", (e) => {
         let ticket = CartBtn.parentElement.parentElement;
-        console.log("ticket", ticket.innerHTML);
+        
         let id = ticket.firstElementChild.innerText;
 
         if (cartArr.includes(flights[id])) {
         } else {
             cartArr.push(flights[id]);
         }
-        console.log("CartArr", cartArr);
         showCart(cartArr);
     });
 });
