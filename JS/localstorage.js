@@ -1,6 +1,6 @@
-export let usersInfo = [{email:'test@gmail.com',password:'pasWor@d1',isAdmin:true,currentUser:true}];
+export const usersInfo = [{email:'test@gmail.com',password:'pasWor@d1',isAdmin:true,currentUser:true}];
 
-export let flights = [
+const flights = [
     {
         id:0,
         from: "Tel aviv",

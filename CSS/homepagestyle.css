@@ -69,6 +69,9 @@ input[type="number"] {
     transition: border 0.3s ease;
     width: 200px;
 }
+#priceinput{
+    width: 80px;
+}
 
 .dates{
     display: flex;

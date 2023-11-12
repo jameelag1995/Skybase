@@ -1,15 +1,64 @@
-import { usersInfo, flights } from "./localstorage.js";
-console.log(usersInfo[0]);
-let currUser = usersInfo.filter((user) => user.currentUser === true)[0];
+const flights = [
+    {
+        id:0,
+        from: "Tel aviv",
+        to:'amsterdam',
+        price: 40,
+        dates:[
+            {depart: new Date ('11.24.2023')},
+            {return: new Date ('12.1.2023')}
+        ]
+    },
+    {
+        id:1,
+        from: "Tel aviv",
+        to:'london',
+        price: 75,
+        dates:[
+            {depart: new Date ('11.28.2023')},
+            {return: new Date ('12.12.2023')}
+        ]
+    },
+    {
+        id:2,
+        from: "Athens",
+        to:'Prague',
+        price: 95,
+        dates:[
+            {depart: new Date ('11.28.2023')},
+            {return: new Date ('12.12.2023')}
+        ]
+    },
+    {
+        id:3,
+        from: "Berlin",
+        to:'Prague',
+        price: 22,
+        dates:[
+            {depart: new Date ('11.28.2023')},
+            {return: new Date ('12.12.2023')}
+        ]
+    },
+    {
+        id:4,
+        from: "London",
+        to:'Berlin',
+        price: 100,
+        dates:[
+            {depart: new Date ('11.28.2023')},
+            {return: new Date ('12.12.2023')}
+        ]
+    },
+];
+
 const username = document.getElementById("username");
 const addFlight = document.getElementById("add-flight");
-
-if (currUser.isAdmin === true) {
+if (localStorage.getItem('isAdmin') == 'true') {
     addFlight.style.display = "block";
-    username.innerText = `Admin ${currUser.email}`;
+    username.innerText = `Admin ${localStorage.getItem('email')}`;
 } else {
     addFlight.style.display = "none";
-    username.innerText = `${currUser.email}`;
+    username.innerText = `${localStorage.getItem('email')}`;
 }
 
 const flightsBoard = document.getElementById("flights-board");
@@ -17,16 +66,15 @@ showTickets(flights);
 
 function showTickets(flightsArr) {
     flightsBoard.innerHTML = "";
-    if (currUser.isAdmin === true) {
+    if (localStorage.getItem('isAdmin') == 'true') {
         flightsArr.forEach((flight) => {
             let ticket = document.createElement("div");
             ticket.innerHTML = `<div>${flight.id}</div><div id="from-to">${
                 flight.from
             } &#8594; ${flight.to}</div>
             <div id="departure-return-dates">${flight.dates[0].depart.toDateString()} &#8594; ${flight.dates[1].return.toDateString()}</div>
-            <div id="price"><b>${
-                flight.price
-            }$</b></div><div id="btns"> <button class="btn add-to-cart">Add to Cart</button><button class="btn edit-price">Edit Price</button></div>`;
+            <div id="price"><label for="priceinput">Price:</label>
+            <input type="number" id="priceinput" name="priceinput" value="${flight.price}" required>$</div><div id="btns"> <button class="btn add-to-cart">Add to Cart</button><button class="btn edit-price">Edit Price</button></div>`;
             ticket.classList.add("ticket");
             flightsBoard.append(ticket);
         });
@@ -37,9 +85,9 @@ function showTickets(flightsArr) {
                 flight.to
             }</div>
             <div id="departure-return-dates">${flight.dates[0].depart.toDateString()} &#8594; ${flight.dates[1].return.toDateString()}</div>
-            <div id="price">${
+            <div id="price"><b>${
                 flight.price
-            }$ <button class="btn add-to-cart">Add to Cart</button></div>`;
+            }$</b></div><div id="btns"><button class="btn add-to-cart">Add to Cart</button></div>`;
             ticket.classList.add("ticket");
             flightsBoard.append(ticket);
         });
@@ -111,14 +159,30 @@ searchFlight.addEventListener("submit", (e) => {
 // });
 
 const editPriceBtns = document.querySelectorAll(".edit-price");
+console.log(editPriceBtns);
 editPriceBtns.forEach((editBtn) => {
     editBtn.addEventListener("click", (e) => {
-        let id = editBtn.parentElement.parentElement.firstElementChild.innerText;
+        let ticket = editBtn.parentElement.parentElement;
+        console.log("ticket", ticket.innerHTML);
+        let id = ticket.firstElementChild.innerText;
         console.log(id);
-        let currTicket = flights[id]
-        let newPrice = prompt("enter new price");
+        let currTicket = flights[id];
+        let newPrice = document.getElementById('priceinput').value;
         currTicket.price = newPrice;
         showTickets(flights);
+        console.log('ticket & ticket price:',currTicket,currTicket.price);
+        
     });
 });
-
+const cartBoard = document.getElementById('cart-board');
+const addToCartBtns = document.querySelectorAll(".add-to-cart");
+addToCartBtns.forEach((CartBtn) => {
+    CartBtn.addEventListener("click", (e) => {
+        let ticket = CartBtn.parentElement.parentElement;
+        console.log("ticket", ticket.innerHTML);
+        let id = ticket.firstElementChild.innerText;
+        let currTicket = flights[id];
+        
+        
+    });
+});

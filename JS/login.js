@@ -13,7 +13,8 @@ const admin = document.getElementById("admin");
 /* -------------------------------------------------------------------------- */
 
 let isValid = true;
-import usersInfo from './localstorage.js'
+
+
 
 /* -------------------------------------------------------------------------- */
 /*                                    Func                                    */
@@ -67,8 +68,8 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
     let isAdmin = admin.checked;
     if (isValid) {
-        usersInfo.push({email:emailInput.value,password:passwordInput.value,isAdmin,currentUser:true});
-        console.log(usersInfo);
+        localStorage.setItem('email',emailInput.value);
+        localStorage.setItem('isAdmin',isAdmin);
         form.reset();
         window.location.href = '../HTML/homepage.html';
     } else {

@@ -4,6 +4,11 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Homepage</title>
+        <link
+            rel="icon"
+            href="../imgs/homepage-flight.png"
+            type="image/x-icon"
+        />
         <link rel="stylesheet" href="../CSS/homepagestyle.css" />
     </head>
     <body>
@@ -65,56 +70,53 @@
                     />
                 </form>
             </section>
-            <main id="search-flight"><h1>Flights</h1>
-                <div class="sort-search-container"><form id="search-flight-form">
-                    <input
-                        type="text"
-                        name="flight-from"
-                        id="flight-from"
-                        placeholder="From"
-                        
-                    />
-                    <input
-                        type="text"
-                        name="flight-to"
-                        id="flight-to"
-                        placeholder="To"
-                        
-                    />
-                    <input
-                        type="number"
-                        name="flight-price"
-                        id="flight-price"
-                        placeholder="Price"
-                        min="0"
-                        
-                    />
-                    <div class="dates">
-                        <label for="departure-date"
-                            >Departure Date:
-                            <input
-                                type="date"
-                                name="departure-date"
-                                id="departure-date"
-                                
-                        /></label>
-                        <label for="return-date"
-                            >Return Date:
-                            <input
-                                type="date"
-                                name="return-date"
-                                id="return-date"
-                                
-                        /></label>
-                    </div>
-                    <input
-                        type="submit"
-                        value="Search Flights"
-                        id="add-flight-btn"
-                    />
-                </form>
-                <button id="sort-by-price-btn">Sort By Price</button>
-            </div>
+            <main id="search-flight">
+                <h1>Flights</h1>
+                <div class="sort-search-container">
+                    <form id="search-flight-form">
+                        <input
+                            type="text"
+                            name="flight-from"
+                            id="flight-from"
+                            placeholder="From"
+                        />
+                        <input
+                            type="text"
+                            name="flight-to"
+                            id="flight-to"
+                            placeholder="To"
+                        />
+                        <input
+                            type="number"
+                            name="flight-price"
+                            id="flight-price"
+                            placeholder="Price"
+                            min="0"
+                        />
+                        <div class="dates">
+                            <label for="departure-date"
+                                >Departure Date:
+                                <input
+                                    type="date"
+                                    name="departure-date"
+                                    id="departure-date"
+                            /></label>
+                            <label for="return-date"
+                                >Return Date:
+                                <input
+                                    type="date"
+                                    name="return-date"
+                                    id="return-date"
+                            /></label>
+                        </div>
+                        <input
+                            type="submit"
+                            value="Search Flights"
+                            id="add-flight-btn"
+                        />
+                    </form>
+                    <button id="sort-by-price-btn">Sort By Price</button>
+                </div>
                 <div id="flights-board">
                     <!-- <div id="ticket">
                         <div id="from-to"></div>
@@ -124,10 +126,12 @@
                     </div> -->
                 </div>
             </main>
-            <footer id="user-cart"><h1>foot</h1></footer>
+            <footer id="user-cart">
+                <h1>Cart</h1>
+                <div id="cart-board"></div>
+            </footer>
         </div>
 
-        <script type="module" src="../JS/localstorage.js"></script>
-        <script type="module" src="../JS/homepage.js"></script>
+        <script src="../JS/homepage.js"></script>
     </body>
 </html>
