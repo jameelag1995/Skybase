@@ -128,8 +128,34 @@
             </main>
             <footer id="user-cart">
                 <h1>Cart</h1>
-                <div id="cart-board"></div>
+                <div id="cart-board">
+                    <!-- <div id="item" class="ticket">
+                        <div id="from-to">
+                            ${ cartItem.from } &#8594; ${cartItem.to}
+                        </div>
+                        <div id="departure-return-dates">
+                            ${cartItem.dates[0].depart.toDateString()} &#8594;
+                            ${cartItem.dates[1].return.toDateString()}
+                        </div>
+                        <div id="price"><b>${cartItem.price}$</b></div>
+                        <div id="num-of-tickets">
+                            <label for="ticketnum">Number of Tickets:</label>
+                            <input
+                                type="number"
+                                id="ticketnum"
+                                name="ticketnum"
+                                value="1"
+                                required
+                            />
+                        </div>
+                    </div> -->
+                </div>
             </footer>
+            <section>
+                <button id="calculate-total-btn" class="btn">
+                    Calculate Total</button
+                ><span id="total">0$</span>
+            </section>
         </div>
 
         <script src="../JS/homepage.js"></script>
