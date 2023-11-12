@@ -53,6 +53,8 @@ const flights = [
 
 const username = document.getElementById("username");
 const addFlight = document.getElementById("add-flight");
+
+/* --------------------- Load admin user or normal user --------------------- */
 if (localStorage.getItem("isAdmin") == "true") {
     addFlight.style.display = "block";
     username.innerText = `Admin ${localStorage.getItem("email")}`;
@@ -61,9 +63,13 @@ if (localStorage.getItem("isAdmin") == "true") {
     username.innerText = `${localStorage.getItem("email")}`;
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                Flight Board                                */
+/* -------------------------------------------------------------------------- */
 const flightsBoard = document.getElementById("flights-board");
 showTickets(flights);
 
+/* ------------------ show tickets on flight board function ----------------- */
 function showTickets(flightsArr) {
     flightsBoard.innerHTML = "";
     if (localStorage.getItem("isAdmin") == "true") {
@@ -96,6 +102,7 @@ function showTickets(flightsArr) {
     }
 }
 
+/* ---------------------------- Add Flight Event ---------------------------- */
 addFlight.addEventListener("submit", (e) => {
     e.preventDefault();
     const from = document.getElementById("add-flight-from").value;
@@ -119,6 +126,7 @@ addFlight.addEventListener("submit", (e) => {
     showTickets(flights);
 });
 
+/* --------------------------- Sort Flights Event --------------------------- */
 const sortBtn = document.getElementById("sort-by-price-btn");
 sortBtn.addEventListener("click", (e) => {
     const sortedFlights = flights.sort((flightA, flightB) => {
@@ -128,6 +136,7 @@ sortBtn.addEventListener("click", (e) => {
     showTickets(sortedFlights);
 });
 
+/* -------------------------- Search Flights Event -------------------------- */
 const searchFlight = document.getElementById("search-flight");
 searchFlight.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -138,16 +147,18 @@ searchFlight.addEventListener("submit", (e) => {
     const returnDate = new Date(document.getElementById("return-date").value);
     const filteredFlights = flights.filter((flight) => {
         return (
-            flight.from.includes(from) &&
-            flight.to.includes(to) &&
-            flight.return === returnDate &&
-            flight.depart === depart &&
-            flight.price <= price
+            flight.from.toLowerCase().includes(from) &&
+            flight.to.toLowerCase().includes(to) &&
+            flight.price <= price ||
+            (flight.return === returnDate &&
+                flight.depart === depart )
         );
     });
     // console.log("filtered flights: ", filteredFlights);
     showTickets(filteredFlights);
 });
+
+/* -------------- admin remove flight function not implemented -------------- */
 
 // const removeFlightBtns = document.querySelectorAll(".remove-flight");
 // removeFlightBtns.forEach((removeFlightBtn) => {
@@ -160,6 +171,7 @@ searchFlight.addEventListener("submit", (e) => {
 //     });
 // });
 
+/* ------------------------- Edit Flight Price Event ------------------------ */
 const editPriceBtns = document.querySelectorAll(".edit-price");
 console.log(editPriceBtns);
 editPriceBtns.forEach((editBtn) => {
@@ -175,9 +187,15 @@ editPriceBtns.forEach((editBtn) => {
         console.log("ticket & ticket price:", currTicket, currTicket.price);
     });
 });
+
+/* -------------------------------------------------------------------------- */
+/*                             Cart Functionality                             */
+/* -------------------------------------------------------------------------- */
 const cartArr = [];
 const cartBoard = document.getElementById("cart-board");
 const addToCartBtns = document.querySelectorAll(".add-to-cart");
+
+/* -------------------- add to cart button fucntionality -------------------- */
 addToCartBtns.forEach((CartBtn) => {
     CartBtn.addEventListener("click", (e) => {
         let ticket = CartBtn.parentElement.parentElement;
@@ -192,6 +210,8 @@ addToCartBtns.forEach((CartBtn) => {
         showCart(cartArr);
     });
 });
+
+/* ---------------------- show tickets on cart fucntion --------------------- */
 function showCart(cartlist) {
     cartBoard.innerHTML = "";
     cartlist.forEach((cartItem) => {
@@ -209,9 +229,13 @@ function showCart(cartlist) {
     });
 }
 
+/* -------------------------------------------------------------------------- */
+/*                           Total Price Calculation                          */
+/* -------------------------------------------------------------------------- */
 const calcBtn = document.getElementById("calculate-total-btn");
 const totalEl = document.getElementById("total");
 let total = 0;
+/* ------------------ Calculate Total Button Functionality ------------------ */
 calcBtn.addEventListener("click", (e) => {
     const numOfTicketsInputs = document.querySelectorAll("#ticketnum");
     cartArr.forEach((cartItem, index) => {
@@ -221,6 +245,7 @@ calcBtn.addEventListener("click", (e) => {
     total = 0;
 });
 
+/* ----------------------- Logout Button Functionality ---------------------- */
 const logoutBtn = document.getElementById("logout-btn");
 logoutBtn.addEventListener("click", (e) => {
     window.location.href = "../HTML/Login.html";
